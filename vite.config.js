@@ -15,7 +15,7 @@ export default defineConfig({
         pantry: resolve(__dirname, 'src/pantry/index.html'),
         cookbook: resolve(__dirname, 'src/cookbook/index.html'),
         account: resolve(__dirname, 'src/account/index.html'),
-        shoppinglist: resolve(__dirname, 'src/shoppinglist/index.html')
+        shoppinglist: resolve(__dirname, 'src/shopping-list/index.html')
       },
     },
   },
