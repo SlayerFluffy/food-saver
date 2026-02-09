@@ -20,7 +20,7 @@ export function renderWithTemplate(template, parentElement, data, callback) {
 
 // use loadTemplate to grab header and footer html files, select elements in index files, then render from template
 export async function loadHeaderFooter() {
-  const headerTemplate = await loadTemplate('/partials/headerElement.html');
+  const headerTemplate = await loadTemplate('/partials/header.html');
   const footerTemplate = await loadTemplate('/partials/footer.html');
   const headerElement = qs('#main-header');
   const footerElement = qs('#main-footer');
