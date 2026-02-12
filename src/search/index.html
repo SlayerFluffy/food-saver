@@ -22,19 +22,24 @@
                         <label for="ingredient">Ingredient:</label>
                         <input type="text" name="ingredient" id="ingredient">
                     </div>
+                    <div class="myIngredients">
+                        <!-- submitted ingredients are added here to be compiled for api search -->
+                    </div>
                     <button class="addIngredient">Add new ingredient</button>
                 </div>
                 <div id="priorityRadio">
                     <legend>Do you want to find recipes that use as many of these ingredients as possible, or require the fewest additional ingredients?</legend>
-                    <input type="radio" name="max" value="1"> <label for="max">Prioritize these ingredients</label>
-                    <input type="radio" name="min" value="2"> <label for="min">Requires fewest extra ingredients</label>                
+                    <input type="radio" id='max' name="max-or-min" value="1"> <label for="max">Prioritize these ingredients</label>
+                    <input type="radio" id='min' name="max-or-min" value="2"> <label for="min">Requires fewest extra ingredients</label>                
                 </div>
                 <button class="submit">Search for recipes!</button>
             </form>
         </div>
         <div class="recipeCards">
-
+            <!-- recipes are added here after return from api search -->
+             
         </div>
+        <button class="loadRecipes">load more recipes</button>
     </main>
     <footer id="main-footer"></footer>
 </body>

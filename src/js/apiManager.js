@@ -23,15 +23,19 @@ export class APIManager {
 
     //make API calls
 
-    async getRecipes(listIngredients) {
+    async getRecipes(listIngredients, ranking) {
         const options = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(listIngredients),
+            }
         };
-        return await fetch(`${this.spoonacularBaseURL}findByIngredients/`, options).then(convertToJson);
+        const ingredientList = listIngredients.join(',+');
+        const params = new URLSearchParams({
+            ingredients: ingredientList,
+            ranking: ranking
+        });
+        return await fetch(`${this.spoonacularBaseURL}findByIngredients?`+ params, options).then(convertToJson);
     }
 
     async getPrices(listIngredients) {
