@@ -1,5 +1,4 @@
 import { qs } from "./utils.mjs";
-import { getRecipes } from "./apiManager.js";
 
 // format recipe from json object as a recipe card
 function recipeCardTemplate(recipe) {
@@ -18,22 +17,22 @@ function recipeCardTemplate(recipe) {
 
 // select element then insert cardTemplate object
 // this function will be called when a search is submitted
-function displayRecipe(jsonList) {
+export function displayRecipe(jsonList) {
     const element = qs('.recipeCards');
+    let cardGrid;
+    
     // check if cardGrid div exists, if not, create it.
     if (!qs('.cardGrid')) {
-        const cardGrid = document.createElement('div');
+        cardGrid = document.createElement('div');
         cardGrid.setAttribute('class', 'cardGrid');
-        element.insertAdjacentHTML('beforeend', cardGrid);
+        element.appendChild(cardGrid); 
     } else {
-        const cardGrid = qs('.cardGrid');
+        cardGrid = qs('.cardGrid');
     }
-    // map cardTemplates to grid
-    const recipeRes = jsonList.map(recipe => recipeCardTemplate(recipe));
     
+    // map cardTemplates to grid and join into single string
+    const recipeRes = jsonList.map(recipe => recipeCardTemplate(recipe)).join('');
     
-    
-
+    // Insert the joined HTML string
+    cardGrid.insertAdjacentHTML('beforeend', recipeRes);
 }
-
-// load more recipes, called when "load more recipes" button is pressed

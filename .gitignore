@@ -22,6 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-food-saver.code-workspace
-
+# Environment and configuration files
 .env
+src/js/config.js
+
+food-saver.code-workspace

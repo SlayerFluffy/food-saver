@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   root: 'src/',
   publicDir: 'public',
+  envDir: '../', // Look for .env in project root
 
   build: {
     outDir: '../dist',

@@ -1,6 +1,6 @@
-// API keys
-const spoonacularAPI = import.meta.env.SPOONACULAR_API_KEY
-const walmartAPI = import.meta.env.WALMART_API_KEY
+// API keys - Using environment variables 
+const spoonacularAPI = import.meta.env.VITE_SPOONACULAR_API_KEY;
+const walmartAPI = import.meta.env.VITE_WALMART_API_KEY;
 
 // convert response from API to JSON
 async function convertToJson(res) {
@@ -33,9 +33,10 @@ export class APIManager {
         const ingredientList = listIngredients.join(',+');
         const params = new URLSearchParams({
             ingredients: ingredientList,
-            ranking: ranking
+            ranking: ranking,
+            number: 20
         });
-        return await fetch(`${this.spoonacularBaseURL}findByIngredients?`+ params, options).then(convertToJson);
+        return await fetch(`${this.spoonacularBaseURL}findByIngredients?apiKey=${spoonacularAPI}&`+ params, options).then(convertToJson);
     }
 
     async getPrices(listIngredients) {

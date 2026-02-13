@@ -1,5 +1,5 @@
 import { setClick, qs } from "./utils.mjs";
-import { APIManager } from "./apiManager.js";
+import { APIManager } from "./apiManager.mjs";
 import { displayRecipe } from "./recipe.js"
  
 // format search terms to pass to getAPI
@@ -28,9 +28,9 @@ setClick('.submit', () => {
     });
     const maxMin = qs('input[name=max-or-min]:checked').value;
     // pass list and number input into api call
-    const spoonifyAPI = new APIManager;
+    const spoonacularAPI = new APIManager;
     try {
-        const data = spoonifyAPI.getRecipes(searchList, maxMin);
+        const data = spoonacularAPI.getRecipes(searchList, maxMin);
         // display response as recipe cards
         displayRecipe(data);
     } catch (e) {
