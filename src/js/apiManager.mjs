@@ -1,6 +1,5 @@
 // API keys - Using environment variables 
 const spoonacularAPI = import.meta.env.VITE_SPOONACULAR_API_KEY;
-const walmartAPI = import.meta.env.VITE_WALMART_API_KEY;
 
 // convert response from API to JSON
 async function convertToJson(res) {
@@ -34,7 +33,7 @@ export class APIManager {
             ranking: ranking,
             number: 20
         });
-        return await fetch(`${this.spoonacularBaseURL}findByIngredients?apiKey=${spoonacularAPI}&`+ params, options).then(convertToJson);
+        return await fetch(`${this.spoonacularBaseURL}findByIngredients?apiKey=${spoonacularAPI}&` + params, options).then(convertToJson); // this is API call #1
     }
 
     // Get full recipe information by ID
@@ -58,93 +57,7 @@ export class APIManager {
             }
         };
 
-        const url = `${this.spoonacularBaseURL}${recipeId}/information?apiKey=${spoonacularAPI}&${params}`;
-        return await fetch(url, requestOptions).then(convertToJson);
-    }
-
-    // Get multiple recipes' information in batch (more efficient for multiple IDs)
-    async getBulkRecipeInformation(recipeIds, includeNutrition = false) {
-        const params = new URLSearchParams({
-            ids: recipeIds.join(','),
-            includeNutrition: includeNutrition.toString()
-        });
-
-        const requestOptions = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        };
-
-        const url = `${this.spoonacularBaseURL}informationBulk?apiKey=${spoonacularAPI}&${params}`;
-        return await fetch(url, requestOptions).then(convertToJson);
-    }
-
-    // Get analyzed recipe instructions (step-by-step with equipment, ingredients, etc.)
-    async getAnalyzedRecipeInstructions(recipeId) {
-        const requestOptions = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        };
-
-        const url = `${this.spoonacularBaseURL}${recipeId}/analyzedInstructions?apiKey=${spoonacularAPI}`;
-        return await fetch(url, requestOptions).then(convertToJson);
-    }
-
-    // Search recipes with more detailed parameters
-    async searchRecipes(query, options = {}) {
-        const {
-            diet = '',
-            intolerances = '',
-            cuisine = '',
-            type = '',
-            maxReadyTime = '',
-            minCarbs = '',
-            maxCarbs = '',
-            minProtein = '',
-            maxProtein = '',
-            minCalories = '',
-            maxCalories = '',
-            offset = 0,
-            number = 10,
-            addRecipeInformation = true
-        } = options;
-
-        const params = new URLSearchParams({
-            query,
-            diet,
-            intolerances,
-            cuisine,
-            type,
-            maxReadyTime,
-            minCarbs,
-            maxCarbs,
-            minProtein,
-            maxProtein,
-            minCalories,
-            maxCalories,
-            offset: offset.toString(),
-            number: number.toString(),
-            addRecipeInformation: addRecipeInformation.toString()
-        });
-
-        // Remove empty parameters
-        for (const [key, value] of [...params.entries()]) {
-            if (!value || value === '') {
-                params.delete(key);
-            }
-        }
-
-        const requestOptions = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        };
-
-        const url = `${this.spoonacularBaseURL}complexSearch?apiKey=${spoonacularAPI}&${params}`;
+        const url = `${this.spoonacularBaseURL}${recipeId}/information?apiKey=${spoonacularAPI}&${params}`; // this is API call #2 as this is a separate end point and requires different params
         return await fetch(url, requestOptions).then(convertToJson);
     }
 }

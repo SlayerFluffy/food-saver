@@ -1,5 +1,5 @@
 :root {
-  --main-color: #ef5837;
+  --main-color: #693636;
   --background-color: #fff5ed;
   --neutral-color: #ffffff;
   --accent-color: #4f8f5f;
@@ -66,11 +66,10 @@ a:hover {
   color: var(--accent-color);
 }
 
-.hidden {
-  display: none !important;
-}
-
-.container {
+.container,
+.pantry-container,
+.cookbook-container,
+.account-container {
   max-width: var(--max-width);
   margin: 0 auto;
 }
@@ -305,6 +304,10 @@ textarea:focus {
   transform: translateY(-0.65rem) rotate(-45deg);
 }
 
+.hamburger-menu:hover span {
+  background: var(--accent-color);
+}
+
 .mobile-menu {
   position: fixed;
   inset: 0;
@@ -440,11 +443,20 @@ textarea:focus {
   font-size: 1.5rem;
   cursor: pointer;
   color: var(--muted-color);
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
 }
 
 .close-btn:hover,
 .modal-close:hover {
-  color: var(--main-color);
+  background: var(--border-color);
+  color: var(--text-color);
 }
 
 /* Home */
@@ -472,11 +484,6 @@ textarea:focus {
   font-size: 0.9rem;
   color: var(--neutral-color);
   opacity: 0.9;
-}
-
-.benefits-intro {
-  text-align: center;
-  color: var(--muted-color);
 }
 
 .step {
@@ -533,7 +540,9 @@ textarea:focus {
 .dashboard-stats,
 .quick-actions-grid,
 .recipes-grid,
-.quick-actions {
+.quick-actions,
+.pantry-items-grid,
+.recipe-grid {
   display: grid;
   gap: var(--space-lg);
 }
@@ -559,10 +568,6 @@ textarea:focus {
   flex-direction: column;
 }
 
-.recipe-card.healthy {
-  border: 2px solid var(--accent-color);
-}
-
 .recipe-price {
   color: var(--accent-color);
   font-weight: 600;
@@ -585,10 +590,7 @@ textarea:focus {
 }
 
 /* Account */
-.account-container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-}
+
 
 .auth-form {
   max-width: 420px;
@@ -598,10 +600,6 @@ textarea:focus {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow);
   display: none;
-}
-
-.auth-form.active {
-  display: block;
 }
 
 .demo-account {
@@ -766,12 +764,6 @@ textarea:focus {
   background: #dc2626;
 }
 
-.pantry-container,
-.cookbook-container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-}
-
 .page-header {
   text-align: center;
   margin-bottom: var(--space-xl);
@@ -804,8 +796,6 @@ textarea:focus {
 .recipes-grid,
 .recipe-grid {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: var(--space-lg);
-  display: grid;
 }
 
 .recipe-card {
@@ -901,28 +891,11 @@ textarea:focus {
   width: 100%;
 }
 
-.close-btn {
+.modal-content .close-btn {
   position: absolute;
   top: var(--space-md);
   right: var(--space-md);
-  background: none;
-  border: none;
   font-size: 2rem;
-  cursor: pointer;
-  color: var(--muted-color);
-  padding: 0;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-sm);
-  transition: all 0.2s ease;
-}
-
-.close-btn:hover {
-  background: var(--border-color);
-  color: var(--text-color);
 }
 
 .recipe-modal-header {
@@ -938,6 +911,7 @@ textarea:focus {
   object-fit: cover;
   border-radius: var(--radius-sm);
   flex-shrink: 0;
+  margin-bottom: var(--space-md);
 }
 
 .recipe-modal-info {
@@ -973,6 +947,8 @@ textarea:focus {
 .recipe-section h3 {
   text-align: left;
   margin: var(--space-sm) 0;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: var(--space-xs);
 }
 
 .ingredients-list,
@@ -983,7 +959,7 @@ textarea:focus {
 
 .ingredients-list li,
 .instructions-list li {
-  margin: var(--space-sm) 0;
+  margin-bottom: var(--space-xs);
 }
 
 .instructions-text {
@@ -991,7 +967,8 @@ textarea:focus {
   line-height: 1.6;
 }
 
-.recipe-modal-actions {
+.recipe-modal-actions,
+.recipe-actions {
   display: flex;
   gap: var(--space-md);
   padding-top: var(--space-lg);
@@ -1011,9 +988,15 @@ textarea:focus {
 }
 
 .pantry-stats,
-.cookbook-stats {
+.cookbook-stats,
+.benefits-intro {
+  text-align: center;
   font-size: 1.05rem;
   color: var(--muted-color);
+}
+
+.benefits-intro {
+  font-size: 1rem;
 }
 
 .search-filter,
@@ -1033,11 +1016,6 @@ textarea:focus {
   margin-top: var(--space-xl);
 }
 
-.action-icon {
-  font-size: 2.5rem;
-  margin-bottom: var(--space-sm);
-}
-
 .search-container {
   display: flex;
   gap: var(--space-md);
@@ -1049,9 +1027,14 @@ textarea:focus {
   color: var(--muted-color);
 }
 
-.meal-placeholder {
+.meal-placeholder,
+.empty-state {
   text-align: center;
   color: var(--muted-color);
+}
+
+.empty-state {
+  padding: var(--space-xl) var(--space-lg);
 }
 
 .add-meal-text {
@@ -1102,7 +1085,8 @@ textarea:focus {
 .recipe-actions {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-sm);
+  padding-top: 0;
+  border-top: none;
   margin-top: var(--space-md);
 }
 
@@ -1177,50 +1161,24 @@ textarea:focus {
   max-width: 900px;
 }
 
-.recipe-modal-image {
+.recipe-modal-header .recipe-modal-image {
   width: 100%;
   max-height: 300px;
-  object-fit: cover;
-  border-radius: var(--radius-sm);
-  margin-bottom: var(--space-md);
-}
-
-.recipe-section {
-  margin-bottom: var(--space-lg);
-}
-
-.recipe-section h3 {
-  margin-bottom: var(--space-sm);
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: var(--space-xs);
-}
-
-.ingredients-list,
-.instructions-list {
-  padding-left: 1.25rem;
-  margin: 0;
-}
-
-.ingredients-list li,
-.instructions-list li {
-  margin-bottom: var(--space-xs);
 }
 
 .recipe-modal-actions {
-  display: flex;
-  gap: var(--space-md);
   flex-wrap: wrap;
   margin-top: var(--space-md);
 }
 
-.empty-state {
-  text-align: center;
-  padding: var(--space-xl) var(--space-lg);
-}
-
-.empty-icon {
+.empty-icon,
+.action-icon {
   font-size: 3rem;
   margin-bottom: var(--space-sm);
+}
+
+.action-icon {
+  font-size: 2.5rem;
 }
 
 /* Planner */
@@ -1336,8 +1294,9 @@ textarea:focus {
   font-size: 0.85rem;
 }
 
-.pending-recipes-section.hidden {
-  display: none;
+.pending-recipes-section.hidden,
+.hidden {
+  display: none !important;
 }
 
 .meal-planner-grid {
@@ -1427,7 +1386,8 @@ textarea:focus {
   display: none;
 }
 
-.tab-content.active {
+.tab-content.active,
+.auth-form.active {
   display: block;
 }
 

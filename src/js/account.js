@@ -10,30 +10,30 @@ class Account {
     async init() {
         this.setupEventListeners();
         this.showCorrectView();
-        this.createDemoAccount();
+        // this.createDemoAccount();
     }
 
-    // Create demo account if it doesn't exist
-    createDemoAccount() {
-        try {
-            const demoData = {
-                firstName: 'Demo',
-                lastName: 'User',
-                email: 'demo@foodsaver.com',
-                password: 'demo123',
-                confirmPassword: 'demo123'
-            };
+    // // Create demo account if it doesn't exist
+    // createDemoAccount() {
+    //     try {
+    //         const demoData = {
+    //             firstName: 'Demo',
+    //             lastName: 'User',
+    //             email: 'demo@foodsaver.com',
+    //             password: 'demo123',
+    //             confirmPassword: 'demo123'
+    //         };
             
-            // Try to register demo account (will fail if already exists)
-            authManager.register(demoData);
-            console.log('Demo account created');
-        } catch (error) {
-            // Demo account already exists, which is fine
-            if (!error.message.includes('already exists')) {
-                console.log('Demo account setup:', error.message);
-            }
-        }
-    }
+    //         // Try to register demo account (will fail if already exists)
+    //         authManager.register(demoData);
+    //         console.log('Demo account created');
+    //     } catch (error) {
+    //         // Demo account already exists, which is fine
+    //         if (!error.message.includes('already exists')) {
+    //             console.log('Demo account setup:', error.message);
+    //         }
+    //     }
+    // }
 
     setupEventListeners() {
         // Form switching
@@ -61,7 +61,7 @@ class Account {
         }
 
         // Demo login
-        setClick('#demo-login', () => this.handleDemoLogin());
+        // setClick('#demo-login', () => this.handleDemoLogin());
 
         // Dashboard functionality
         setClick('#logout-btn', () => this.handleLogout());
@@ -272,19 +272,19 @@ class Account {
         }
     }
 
-    handleDemoLogin() {
-        try {
-            const user = authManager.login('demo@foodsaver.com', 'demo123');
-            this.showMessage(`Welcome to the demo, ${user.firstName}!`, 'success');
+    // handleDemoLogin() {
+    //     try {
+    //         const user = authManager.login('demo@foodsaver.com', 'demo123');
+    //         this.showMessage(`Welcome to the demo, ${user.firstName}!`, 'success');
             
-            setTimeout(() => {
-                this.showCorrectView();
-            }, 1000);
+    //         setTimeout(() => {
+    //             this.showCorrectView();
+    //         }, 1000);
             
-        } catch (error) {
-            this.showMessage('Demo account unavailable: ' + error.message, 'error');
-        }
-    }
+    //     } catch (error) {
+    //         this.showMessage('Demo account unavailable: ' + error.message, 'error');
+    //     }
+    // }
 
     handleLogout() {
         authManager.logout();
