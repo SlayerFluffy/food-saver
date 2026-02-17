@@ -5,17 +5,163 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Food Saver</title>
+    <title>Food Saver - My Pantry</title>
     <script src="../js/main.js" type="module"></script>
+    <script src="../js/pantry.js" type="module"></script>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
     <header id="main-header"></header>
     <main>
-        <div>Content</div>
+        <div class="pantry-container">
+            <div class="page-header">
+                <h1>My Pantry</h1>
+                <p>Track your ingredients and manage your kitchen inventory</p>
+                <div class="pantry-stats">
+                    <span>Total Items: <strong id="pantry-count">0</strong></span>
+                </div>
+            </div>
+
+            <!-- Add Ingredient Form -->
+            <div class="add-ingredient-section">
+                <h2>Add Ingredient</h2>
+                <form id="add-ingredient-form" class="ingredient-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ingredient-name">Ingredient Name</label>
+                            <input 
+                                type="text" 
+                                id="ingredient-name" 
+                                name="name" 
+                                required 
+                                placeholder="e.g., Milk, Eggs, Bread"
+                                autocomplete="off"
+                            >
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="ingredient-quantity">Quantity</label>
+                            <input 
+                                type="number" 
+                                id="ingredient-quantity" 
+                                name="quantity" 
+                                min="0.1" 
+                                step="0.1" 
+                                value="1"
+                                required
+                            >
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="ingredient-unit">Unit</label>
+                            <select id="ingredient-unit" name="unit">
+                                <option value="item">Item(s)</option>
+                                <option value="lb">Pounds</option>
+                                <option value="kg">Kilograms</option>
+                                <option value="oz">Ounces</option>
+                                <option value="g">Grams</option>
+                                <option value="cup">Cup(s)</option>
+                                <option value="liter">Liter(s)</option>
+                                <option value="ml">Milliliters</option>
+                                <option value="tsp">Teaspoon(s)</option>
+                                <option value="tbsp">Tablespoon(s)</option>
+                                <option value="piece">Piece(s)</option>
+                                <option value="can">Can(s)</option>
+                                <option value="package">Package(s)</option>
+                                <option value="box">Box(es)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="expiry-date">Expiry Date (Optional)</label>
+                        <input 
+                            type="date" 
+                            id="expiry-date" 
+                            name="expiryDate"
+                        >
+                        <small>Leave blank if item doesn't expire</small>
+                    </div>
+                    
+                    <button type="submit" class="btn">Add to Pantry</button>
+                </form>
+            </div>
+
+            <!-- Pantry Controls -->
+            <div class="pantry-controls">
+                <div class="search-filter">
+                    <input 
+                        type="text" 
+                        id="pantry-search" 
+                        placeholder="Search ingredients..."
+                        class="search-input"
+                    >
+                </div>
+                
+                <div class="sort-filter">
+                    <label for="pantry-sort">Sort by:</label>
+                    <select id="pantry-sort">
+                        <option value="name" selected>Name</option>
+                        <option value="added">Date Added</option>
+                        <option value="expiry">Expiry Date</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-pantry" class="empty-state hidden">
+                <div class="empty-icon">🥫</div>
+                <h3>Your pantry is empty</h3>
+                <p>Start by adding some ingredients you have in your kitchen</p>
+                <button class="btn" onclick="document.getElementById('ingredient-name').focus()">
+                    Add Your First Ingredient
+                </button>
+            </div>
+
+            <!-- Pantry Items Table -->
+            <div class="pantry-items-section">
+                <table id="pantry-items" class="pantry-table">
+                    <thead>
+                        <tr>
+                            <th class="checkbox-col">
+                                <input type="checkbox" id="select-all-checkbox" aria-label="Select all items">
+                            </th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Expiry Date</th>
+                            <th>Added Date</th>
+                            <th class="actions-col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pantry-tbody">
+                        <!-- Pantry items will be dynamically inserted here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Selected Items Actions -->
+            <div id="selected-actions" class="selected-actions hidden">
+                <p>
+                    <span id="selected-count">0</span> item(s) selected
+                </p>
+                <div class="action-buttons">
+                    <button id="add-selected-to-shopping" class="btn">Add to Shopping List</button>
+                    <button id="remove-selected-items" class="btn remove-btn">Remove from Pantry</button>
+                    <button id="clear-selection" class="btn">Clear Selection</button>
+                </div>
+            </div>
+            
+        <!-- Message Container -->
+        <div id="message-container" class="message-container hidden">
+            <div class="message">
+                <span id="message-text"></span>
+                <button class="message-close">&times;</button>
+            </div>
+        </div>
     </main>
     <footer id="main-footer"></footer>
+
 </body>
 
 </html>

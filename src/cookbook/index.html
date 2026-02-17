@@ -5,17 +5,92 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Food Saver</title>
+    <title>Food Saver - My Cookbook</title>
     <script src="../js/main.js" type="module"></script>
+    <script src="../js/cookbook.js" type="module"></script>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
     <header id="main-header"></header>
     <main>
-        <div>Content</div>
+        <div class="cookbook-container">
+            <div class="page-header">
+                <h1>My Cookbook</h1>
+                <p>Your collection of saved recipes</p>
+                <div class="cookbook-stats">
+                    <span>Saved Recipes: <strong id="recipe-count">0</strong></span>
+                </div>
+            </div>
+
+            <!-- Cookbook Controls -->
+            <div class="cookbook-controls">
+                <div class="search-filter">
+                    <input 
+                        type="text" 
+                        id="cookbook-search" 
+                        placeholder="Search recipes and tags..."
+                        class="search-input"
+                    >
+                </div>
+                
+                <div class="filter-sort-controls">
+                    <div class="category-filter">
+                        <label for="category-filter">Category:</label>
+                        <select id="category-filter">
+                            <option value="all">All Categories</option>
+                            <option value="breakfast">Breakfast</option>
+                            <option value="lunch">Lunch</option>
+                            <option value="dinner">Dinner</option>
+                            <option value="dessert">Dessert</option>
+                            <option value="snack">Snack</option>
+                            <option value="vegetarian">Vegetarian</option>
+                            <option value="vegan">Vegan</option>
+                            <option value="gluten-free">Gluten-Free</option>
+                            <option value="quick">Quick & Easy</option>
+                        </select>
+                    </div>
+                    
+                    <div class="sort-filter">
+                        <label for="cookbook-sort">Sort by:</label>
+                        <select id="cookbook-sort">
+                            <option value="added">Recently Added</option>
+                            <option value="title">Name</option>
+                            <option value="time">Cook Time</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-cookbook" class="empty-state hidden">
+                <div class="empty-icon">📖</div>
+                <h3>Your cookbook is empty</h3>
+                <p>Search for recipes and save your favorites to build your personal cookbook</p>
+                <a href="/search/" class="btn">
+                    Find Recipes to Save
+                </a>
+            </div>
+
+            <!-- Recipe Grid -->
+            <div class="cookbook-recipes-section">
+                <div id="cookbook-recipes" class="recipes-grid">
+                    <!-- Recipe cards will be dynamically inserted here -->
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Message Container -->
+        <div id="message-container" class="message-container hidden">
+            <div class="message">
+                <span id="message-text"></span>
+                <button class="message-close">&times;</button>
+            </div>
+        </div>
     </main>
     <footer id="main-footer"></footer>
+
 </body>
 
 </html>

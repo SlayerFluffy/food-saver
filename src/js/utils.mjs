@@ -40,6 +40,7 @@ export function setLocalStorage(key, data) {
 }
 
 // add event listeners
+
 export function setClick(selector, callback) {
   qs(selector).addEventListener("touchend", (event) => {
     event.preventDefault();

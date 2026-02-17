@@ -5,15 +5,266 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Food Saver</title>
+    <title>Meal Planner - Food Saver</title>
     <script src="../js/main.js" type="module"></script>
+    <script src="../js/planner.js" type="module"></script>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
     <header id="main-header"></header>
-    <main>
-        <div>Content</div>
+    <main class="planner-main">
+        <div class="container">
+            <div class="page-header">
+                <h1>Weekly Meal Planner</h1>
+                <p>Plan your meals for the week and generate shopping lists</p>
+                
+                <div class="planner-controls">
+                    <div class="week-navigation">
+                        <button id="prev-week" class="nav-btn">&lt;</button>
+                        <span id="current-week" class="week-display">Week of Dec 16, 2024</span>
+                        <button id="next-week" class="nav-btn">&gt;</button>
+                    </div>
+                    
+                    <div class="planner-actions">
+                        <button id="clear-week-btn" class="btn">Clear Week</button>
+                        <button id="generate-shopping-btn" class="btn">Generate Shopping List</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Recipes Section -->
+            <div id="pending-recipes-section" class="pending-recipes-section hidden">
+                <h2>Recipes to Add</h2>
+                <p class="pending-recipes-note">Select a recipe below and click "Add to Meal" to place it in your meal plan</p>
+                <div id="pending-recipes-list" class="pending-recipes-list"></div>
+            </div>
+
+            <!-- Weekly Meal Grid -->
+            <div class="meal-planner-grid">
+                <div class="grid-header">
+                    <div class="day-header"></div>
+                    <div class="meal-header">Breakfast</div>
+                    <div class="meal-header">Lunch</div>
+                    <div class="meal-header">Dinner</div>
+                </div>
+
+                <!-- Days of the week -->
+                <div class="day-row" data-day="monday">
+                    <div class="day-label">Monday</div>
+                    <div class="meal-slot" data-meal="breakfast" data-day="monday">
+                        <div class="meal-placeholder">
+                            <span class="add-meal-text">+ Add Meal</span>
+                        </div>
+                    </div>
+                    <div class="meal-slot" data-meal="lunch" data-day="monday">
+                        <div class="meal-placeholder">
+                            <span class="add-meal-text">+ Add Meal</span>
+                        </div>
+                    </div>
+                    <div class="meal-slot" data-meal="dinner" data-day="monday">
+                        <div class="meal-placeholder">
+                            <span class="add-meal-text">+ Add Meal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-row" data-day="tuesday">
+                    <div class="day-label">Tuesday</div>
+                    <div class="meal-slot" data-meal="breakfast" data-day="tuesday">
+                        <div class="meal-placeholder">
+                            <span class="add-meal-text">+ Add Meal</span>
+                        </div>
+                    </div>
+                    <div class="meal-slot" data-meal="lunch" data-day="tuesday">
+                        <div class="meal-placeholder">
+                            <span class="add-meal-text">+ Add Meal</span>
+                        </div>
+                    </div>
+                    <div class="meal-slot" data-meal="dinner" data-day="tuesday">
+                        <div class="meal-placeholder">
+                            <span class="add-meal-text">+ Add Meal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-row" data-day="wednesday">
+                    <div class="day-label">Wednesday</div>
+                    <div class="meal-slot" data-meal="breakfast" data-day="wednesday">
+                        <div class="meal-placeholder">
+                            <span class="add-meal-text">+ Add Meal</span>
+                        </div>
+                    </div>
+                    <div class="meal-slot" data-meal="lunch" data-day="wednesday">
+                        <div class="meal-placeholder">
+                            <span class="add-meal-text">+ Add Meal</span>
+                        </div>
+                    </div>
+                    <div class="meal-slot" data-meal="dinner" data-day="wednesday">
+                        <div class="meal-placeholder">
+                            <span class="add-meal-text">+ Add Meal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-row" data-day="thursday">
+                    <div class="day-label">Thursday</div>
+                    <div class="meal-slot" data-meal="breakfast" data-day="thursday">
+                        <div class="meal-placeholder">
+                            <span class="add-meal-text">+ Add Meal</span>
+                        </div>
+                    </div>
+                    <div class="meal-slot" data-meal="lunch" data-day="thursday">
+                        <div class="meal-placeholder">
+                            <span class="add-meal-text">+ Add Meal</span>
+                        </div>
+                    </div>
+                    <div class="meal-slot" data-meal="dinner" data-day="thursday">
+                        <div class="meal-placeholder">
+                            <span class="add-meal-text">+ Add Meal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-row" data-day="friday">
+                    <div class="day-label">Friday</div>
+                    <div class="meal-slot" data-meal="breakfast" data-day="friday">
+                        <div class="meal-placeholder">
+                            <span class="add-meal-text">+ Add Meal</span>
+                        </div>
+                    </div>
+                    <div class="meal-slot" data-meal="lunch" data-day="friday">
+                        <div class="meal-placeholder">
+                            <span class="add-meal-text">+ Add Meal</span>
+                        </div>
+                    </div>
+                    <div class="meal-slot" data-meal="dinner" data-day="friday">
+                        <div class="meal-placeholder">
+                            <span class="add-meal-text">+ Add Meal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-row" data-day="saturday">
+                    <div class="day-label">Saturday</div>
+                    <div class="meal-slot" data-meal="breakfast" data-day="saturday">
+                        <div class="meal-placeholder">
+                            <span class="add-meal-text">+ Add Meal</span>
+                        </div>
+                    </div>
+                    <div class="meal-slot" data-meal="lunch" data-day="saturday">
+                        <div class="meal-placeholder">
+                            <span class="add-meal-text">+ Add Meal</span>
+                        </div>
+                    </div>
+                    <div class="meal-slot" data-meal="dinner" data-day="saturday">
+                        <div class="meal-placeholder">
+                            <span class="add-meal-text">+ Add Meal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="day-row" data-day="sunday">
+                    <div class="day-label">Sunday</div>
+                    <div class="meal-slot" data-meal="breakfast" data-day="sunday">
+                        <div class="meal-placeholder">
+                            <span class="add-meal-text">+ Add Meal</span>
+                        </div>
+                    </div>
+                    <div class="meal-slot" data-meal="lunch" data-day="sunday">
+                        <div class="meal-placeholder">
+                            <span class="add-meal-text">+ Add Meal</span>
+                        </div>
+                    </div>
+                    <div class="meal-slot" data-meal="dinner" data-day="sunday">
+                        <div class="meal-placeholder">
+                            <span class="add-meal-text">+ Add Meal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <div class="action-card">
+                    <h3>Need Recipe Ideas?</h3>
+                    <p>Search for recipes based on your pantry ingredients</p>
+                    <a href="/search/" class="btn">Browse Recipes</a>
+                </div>
+                
+                <div class="action-card">
+                    <h3>Check Your Cookbook</h3>
+                    <p>Add saved recipes to your meal plan</p>
+                    <a href="/cookbook/" class="btn">View Cookbook</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Meal Modal -->
+        <div id="add-meal-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Add Meal</h2>
+                    <button class="modal-close">&times;</button>
+                </div>
+                
+                <div class="modal-body">
+                    <div class="meal-source-tabs">
+                        <button class="tab-btn active" data-tab="cookbook">From Cookbook</button>
+                        <button class="tab-btn" data-tab="search">Search Recipes</button>
+                        <button class="tab-btn" data-tab="custom">Custom Meal</button>
+                    </div>
+
+                    <!-- Cookbook Tab -->
+                    <div class="tab-content active" data-tab="cookbook">
+                        <div class="cookbook-recipes" id="cookbook-recipes">
+                            <p class="loading-text">Loading your saved recipes...</p>
+                        </div>
+                    </div>
+
+                    <!-- Search Tab -->
+                    <div class="tab-content" data-tab="search">
+                        <div class="search-container">
+                            <input type="text" id="recipe-search-input" placeholder="Search for recipes..." class="search-input">
+                            <button id="recipe-search-btn" class="btn">Search</button>
+                        </div>
+                        <div class="search-results" id="recipe-search-results">
+                            <p class="search-hint">Enter keywords to search for recipes</p>
+                        </div>
+                    </div>
+
+                    <!-- Custom Tab -->
+                    <div class="tab-content" data-tab="custom">
+                        <div class="custom-meal-form">
+                            <input type="text" id="custom-meal-name" placeholder="Meal name (e.g., 'Turkey Sandwich')" class="form-input">
+                            <textarea id="custom-meal-notes" placeholder="Optional notes or ingredients..." class="form-textarea"></textarea>
+                            <button id="add-custom-meal-btn" class="btn">Add Custom Meal</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shopping List Modal -->
+        <div id="shopping-list-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Weekly Shopping List</h2>
+                    <button class="modal-close">&times;</button>
+                </div>
+                
+                <div class="modal-body">
+                    <div class="shopping-list-content" id="shopping-list-content">
+                        <p class="loading-text">Generating your shopping list...</p>
+                    </div>
+                    
+                    <div class="shopping-list-actions">
+                        <button id="save-shopping-list-btn" class="btn">Save to Shopping List</button>
+                        <button id="print-shopping-list-btn" class="btn">Print List</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <footer id="main-footer"></footer>
 </body>

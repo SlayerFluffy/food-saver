@@ -16,9 +16,7 @@ async function convertToJson(res) {
 export class APIManager {
     constructor() {
         this.spoonacularAPIKey = spoonacularAPI;
-        this.walmartAPIKey = walmartAPI;
         this.spoonacularBaseURL = 'https://api.spoonacular.com/recipes/';
-        this.walmartBaseURL = 'https://api.dataextractorpro.com/api/extractor/walmart/search/';
     }
 
     //make API calls
@@ -39,15 +37,114 @@ export class APIManager {
         return await fetch(`${this.spoonacularBaseURL}findByIngredients?apiKey=${spoonacularAPI}&`+ params, options).then(convertToJson);
     }
 
-    async getPrices(listIngredients) {
-        const options = {
+    // Get full recipe information by ID
+    async getRecipeInformation(recipeId, options = {}) {
+        const {
+            includeNutrition = false,
+            addWinePairing = false,
+            addTasteData = false
+        } = options;
+
+        const params = new URLSearchParams({
+            includeNutrition: includeNutrition.toString(),
+            addWinePairing: addWinePairing.toString(),
+            addTasteData: addTasteData.toString()
+        });
+
+        const requestOptions = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': this.walmartAPIKey,
-            },
-            body: JSON.stringify(listIngredients),
+            }
         };
-        return await fetch(`${this.walmartBaseURL}`, options).then(convertToJson);
+
+        const url = `${this.spoonacularBaseURL}${recipeId}/information?apiKey=${spoonacularAPI}&${params}`;
+        return await fetch(url, requestOptions).then(convertToJson);
+    }
+
+    // Get multiple recipes' information in batch (more efficient for multiple IDs)
+    async getBulkRecipeInformation(recipeIds, includeNutrition = false) {
+        const params = new URLSearchParams({
+            ids: recipeIds.join(','),
+            includeNutrition: includeNutrition.toString()
+        });
+
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
+
+        const url = `${this.spoonacularBaseURL}informationBulk?apiKey=${spoonacularAPI}&${params}`;
+        return await fetch(url, requestOptions).then(convertToJson);
+    }
+
+    // Get analyzed recipe instructions (step-by-step with equipment, ingredients, etc.)
+    async getAnalyzedRecipeInstructions(recipeId) {
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
+
+        const url = `${this.spoonacularBaseURL}${recipeId}/analyzedInstructions?apiKey=${spoonacularAPI}`;
+        return await fetch(url, requestOptions).then(convertToJson);
+    }
+
+    // Search recipes with more detailed parameters
+    async searchRecipes(query, options = {}) {
+        const {
+            diet = '',
+            intolerances = '',
+            cuisine = '',
+            type = '',
+            maxReadyTime = '',
+            minCarbs = '',
+            maxCarbs = '',
+            minProtein = '',
+            maxProtein = '',
+            minCalories = '',
+            maxCalories = '',
+            offset = 0,
+            number = 10,
+            addRecipeInformation = true
+        } = options;
+
+        const params = new URLSearchParams({
+            query,
+            diet,
+            intolerances,
+            cuisine,
+            type,
+            maxReadyTime,
+            minCarbs,
+            maxCarbs,
+            minProtein,
+            maxProtein,
+            minCalories,
+            maxCalories,
+            offset: offset.toString(),
+            number: number.toString(),
+            addRecipeInformation: addRecipeInformation.toString()
+        });
+
+        // Remove empty parameters
+        for (const [key, value] of [...params.entries()]) {
+            if (!value || value === '') {
+                params.delete(key);
+            }
+        }
+
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
+
+        const url = `${this.spoonacularBaseURL}complexSearch?apiKey=${spoonacularAPI}&${params}`;
+        return await fetch(url, requestOptions).then(convertToJson);
     }
 }

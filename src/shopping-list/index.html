@@ -7,13 +7,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Food Saver</title>
     <script src="../js/main.js" type="module"></script>
+    <script src="../js/shoppingList.js" type="module"></script>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
     <header id="main-header"></header>
     <main>
-        <div>Content</div>
+        <div class="container">
+            <div class="card shopping-list-page">
+                <div class="shopping-list-header">
+                    <h2>Shopping List</h2>
+                    <p>Saved from your meal plan or added manually.</p>
+                </div>
+                <form id="shopping-list-form" class="shopping-list-form">
+                    <div class="form-group">
+                        <label for="shopping-item-name">Ingredient</label>
+                        <input type="text" id="shopping-item-name" placeholder="Add ingredient">
+                    </div>
+                    <div class="form-group">
+                        <label for="shopping-item-amount">Amount</label>
+                        <input type="number" id="shopping-item-amount" placeholder="0" min="0" step="0.25">
+                    </div>
+                    <div class="form-group">
+                        <label for="shopping-item-unit">Unit</label>
+                        <input type="text" id="shopping-item-unit" placeholder="e.g., cups">
+                    </div>
+                    <button type="submit" class="btn">Add to List</button>
+                </form>
+                <p id="shopping-list-empty" class="empty-state hidden">No items yet. Add a few above.</p>
+                <div id="shopping-list-items" class="shopping-list-items"></div>
+                <div class="shopping-list-page-actions">
+                    <button type="button" id="add-to-pantry-btn" class="btn">Add checked to pantry</button>
+                </div>
+            </div>
+        </div>
     </main>
     <footer id="main-footer"></footer>
 </body>

@@ -4,14 +4,120 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Food Saver</title>
+    <title>Food Saver - Save Food, Save Time, Save Money</title>
     <script src="js/main.js" type="module"></script>
+    <script src="js/home.js" type="module"></script>
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
     <header id="main-header"></header>
     <main>
-      <div>Content</div>
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="hero-content">
+          <h1>Food Saver</h1>
+          <p class="tagline">Save your food, save your time, save your money</p>
+          
+          <div class="hero-search">
+            <form id="hero-search-form" class="search-form">
+              <div class="search-input-container">
+                <input 
+                  type="text" 
+                  id="hero-search-input" 
+                  placeholder="Enter ingredients you have (e.g., chicken, rice, tomatoes)..."
+                  class="search-input"
+                >
+                <button type="submit" class="search-btn">Find Recipes</button>
+              </div>
+              <p class="search-hint">Start typing ingredients you have at home to find recipes</p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quick Navigation Cards -->
+      <section class="quick-nav">
+        <div class="container">
+          <h2>Get Started</h2>
+          <div class="nav-cards">
+            <a href="/pantry/" class="nav-card">
+              <h3>My Pantry</h3>
+              <p>Track your ingredients and expiration dates</p>
+            </a>
+            
+            <a href="/search/" class="nav-card">
+              <h3>Find Recipes</h3>
+              <p>Search for recipes using your ingredients</p>
+            </a>
+            
+            <a href="/planner/" class="nav-card">
+              <h3>Meal Planner</h3>
+              <p>Plan your weekly meals and create shopping lists</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Benefits Section -->
+      <section class="benefits">
+        <div class="container">
+          <h2>How Food Saver Works</h2>
+          <div class="benefits-content">
+            <p class="benefits-intro">
+              Food Saver is meant as a means to save time and money by helping you find recipes based on ingredients you already have in your house. This is done through a simple process.
+            </p>
+            
+            <div class="benefits-steps">
+              <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                  <h3>Search Ingredients</h3>
+                  <p>Search for ingredients you already have or need to use, but don't know what to do with.</p>
+                </div>
+              </div>
+              
+              <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                  <h3>Find Recipes</h3>
+                  <p>Food Saver will find recipes by searching the Spoonacular API for recipes including your list of ingredients.</p>
+                </div>
+              </div>
+              
+              <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                  <h3>Save & Plan</h3>
+                  <p>You can then save those recipes, make a meal plan based on what you find, or compile a shopping list for the (hopefully few) ingredients you are missing for the recipe(s) you are interested in.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="benefits-outcome">
+              <p>
+                This will help enable you to make delicious meals, use up what's already in your pantry, and spend less by only buying what you need.
+              </p>
+              <p class="cta-text">Start saving food and money today.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Call to Action -->
+      <section class="cta">
+        <div class="container">
+          <div class="cta-content">
+            <h2>Ready to start saving?</h2>
+            <p>Create your account to begin tracking your pantry and finding great recipes.</p>
+            <div class="cta-buttons">
+              <a href="/account/" class="btn" id="get-started-btn">Get Started</a>
+            </div>
+            <p class="login-option">
+              Already have an account? <a href="/account/" class="login-link">Sign in here</a>
+            </p>
+          </div>
+        </div>
+      </section>
     </main>
     <footer id="main-footer"></footer>
   </body>

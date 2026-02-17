@@ -15,32 +15,53 @@
     <header id="main-header"></header>
     <main>
         <h1></h1>
-        <div class="searchContainer">
-            <form name="ingredientSearch-form">
-                <div id="ownedIngredients">
-                    Ingredient list:
-                    <div class="ingredientInput">
-                        <label for="ingredient">Ingredient:</label>
-                        <input type="text" name="ingredient" id="ingredient">
+        <div class="container">
+            <div class="card">
+                <form name="ingredientSearch-form">
+                    <div id="ownedIngredients">
+                        <h2>Search by Ingredients</h2>
+                        <div class="form-group">
+                            <label for="ingredient">Ingredient:</label>
+                            <input type="text" name="ingredient" id="ingredient" placeholder="Add an ingredient">
+                        </div>
+                        <div id="ingredientList">
+                            <!-- submitted ingredients are added here to be compiled for api search -->
+                        </div>
+                        <button type="button" class="btn btn-sm" id="addIngredientBtn">Add ingredient</button>
                     </div>
-                    <div class="myIngredients">
-                        <!-- submitted ingredients are added here to be compiled for api search -->
+                    <div id="priorityRadio" class="form-group">
+                        <fieldset>
+                            <legend>Search Preference</legend>
+                            <div class="form-group">
+                                <label>
+                                    <input type="radio" name="max-or-min" value="1"> 
+                                    <span>Prioritize using these ingredients</span>
+                                </label>
+                                <label>
+                                    <input type="radio" name="max-or-min" value="2"> 
+                                    <span>Minimize extra ingredients needed</span>
+                                </label>
+                            </div>
+                        </fieldset>
                     </div>
-                    <button class="addIngredient">Add new ingredient</button>
-                </div>
-                <div id="priorityRadio">
-                    <legend>Do you want to find recipes that use as many of these ingredients as possible, or require the fewest additional ingredients?</legend>
-                    <input type="radio" id='max' name="max-or-min" value="1"> <label for="max">Prioritize these ingredients</label>
-                    <input type="radio" id='min' name="max-or-min" value="2"> <label for="min">Requires fewest extra ingredients</label>                
-                </div>
-                <button class="submit">Search for recipes!</button>
-            </form>
+                    <div class="include-pantry">
+                        <label>
+                            <input type="checkbox" id="include-pantry-checkbox">
+                            <span>Include ingredients from my pantry in search</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn">Search for recipes</button>
+                </form>
+            </div>
         </div>
-        <div class="recipeCards">
-            <!-- recipes are added here after return from api search -->
-             
+        <div class="container">
+            <div id="recipeResults">
+                <!-- recipes are added here after return from api search -->
+            </div>
         </div>
-        <button class="loadRecipes">load more recipes</button>
+        <div class="container" id="loadMoreContainer" style="display: none;">
+            <button class="btn" id="loadMoreBtn">Load more recipes</button>
+        </div>
     </main>
     <footer id="main-footer"></footer>
 </body>
