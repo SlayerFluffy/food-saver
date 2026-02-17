@@ -236,7 +236,7 @@ async function saveRecipe(recipeId, button = null) {
         // Show loading state
         if (button) {
             button.disabled = true;
-            button.textContent = '⏳ Saving...';
+            button.textContent = 'Saving...';
         }
 
         // Fetch full recipe data

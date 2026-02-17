@@ -25,6 +25,7 @@ export class APIManager {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                'x-api-key': spoonacularAPI,
             }
         };
         const ingredientList = listIngredients.join(',+');
@@ -33,7 +34,7 @@ export class APIManager {
             ranking: ranking,
             number: 20
         });
-        return await fetch(`${this.spoonacularBaseURL}findByIngredients?apiKey=${spoonacularAPI}&` + params, options).then(convertToJson); // this is API call #1
+        return await fetch(`${this.spoonacularBaseURL}findByIngredients?` + params, options).then(convertToJson); // this is API call #1
     }
 
     // Get full recipe information by ID
@@ -54,10 +55,11 @@ export class APIManager {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                'x-api-key': spoonacularAPI,
             }
         };
 
-        const url = `${this.spoonacularBaseURL}${recipeId}/information?apiKey=${spoonacularAPI}&${params}`; // this is API call #2 as this is a separate end point and requires different params
+        const url = `${this.spoonacularBaseURL}${recipeId}/information?${params}`; // this is API call #2 as this is a separate end point and requires different params
         return await fetch(url, requestOptions).then(convertToJson);
     }
 }
