@@ -363,3 +363,5 @@ function showMessage(message, type = 'info') {
 
     setTimeout(() => container.classList.add('hidden'), 3000);
 }
+
+export { displayRecipe };
