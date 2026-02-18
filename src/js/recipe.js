@@ -112,7 +112,7 @@ export async function showRecipeModal(recipeIdOrObject) {
                         <img src="${details.image}" alt="${details.title}" class="recipe-modal-image">
                         <div class="recipe-modal-info">
                             <h2>${details.title}</h2>
-                            <p>⏱️ ${details.readyInMinutes || "N/A"} minutes | 🍽️ ${details.servings || 1} serving${details.servings !== 1 ? "s" : ""}</p>
+                            <p> ${details.readyInMinutes || "N/A"} minutes | ${details.servings || 1} serving${details.servings !== 1 ? "s" : ""}</p>
                             ${tagsHTML}
                         </div>
                     </div>
@@ -132,8 +132,8 @@ export async function showRecipeModal(recipeIdOrObject) {
                     </div>
 
                     <div class="recipe-modal-actions">
-                        ${!isFromCookbook ? `<button class="btn save-recipe-modal" data-recipe-id="${recipeId}">📖 Save to Cookbook</button>` : ""}
-                        <button class="btn add-to-meal-modal" data-recipe-id="${recipeId}">📅 Add to Meal Plan</button>
+                        ${!isFromCookbook ? `<button class="btn save-recipe-modal" data-recipe-id="${recipeId}">Save to Cookbook</button>` : ""}
+                        <button class="btn add-to-meal-modal" data-recipe-id="${recipeId}">Add to Meal Plan</button>
                     </div>
                 </div>
             </div>
@@ -223,12 +223,12 @@ function buildInstructionsHTML(details) {
 function buildDietaryTagsHTML(details) {
   const tags = [];
 
-  if (details.vegetarian) tags.push("🥬 Vegetarian");
-  if (details.vegan) tags.push("🌱 Vegan");
-  if (details.glutenFree) tags.push("🌾 Gluten-Free");
-  if (details.dairyFree) tags.push("🥛 Dairy-Free");
-  if (details.ketogenic) tags.push("🥓 Keto");
-  if (details.healthy) tags.push("💚 Healthy");
+  if (details.vegetarian) tags.push("✅ Vegetarian");
+  if (details.vegan) tags.push("✅ Vegan");
+  if (details.glutenFree) tags.push("✅ Gluten-Free");
+  if (details.dairyFree) tags.push("✅ Dairy-Free");
+  if (details.ketogenic) tags.push("✅ Keto");
+  if (details.healthy) tags.push("✅ Healthy");
 
   if (tags.length === 0) return "";
 
@@ -265,7 +265,7 @@ async function saveRecipe(recipeId, button = null) {
       instructions: buildInstructionsHTML(recipe),
     };
 
-    // Save to auth system (already generates ID and timestamp)
+    // Save to auth system
     authManager.addToCookbook(cookbookRecipe);
 
     showMessage(`✅ "${recipe.title}" saved to cookbook!`, "success");

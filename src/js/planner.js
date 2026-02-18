@@ -330,7 +330,6 @@ class MealPlanner {
           ${mealData.readyInMinutes ? `<span class="meal-time">${mealData.readyInMinutes} min</span>` : ""}
         </div>
         <div class="meal-actions">
-          <button class="meal-action-btn view-btn" onclick="window.mealPlanner.viewMeal('${mealData.id}')">👁</button>
           <button class="meal-action-btn remove-btn" onclick="window.mealPlanner.removeMeal('${slot.dataset.day}', '${slot.dataset.meal}')">&times;</button>
         </div>
       </div>
@@ -589,11 +588,6 @@ class MealPlanner {
         this.renderEmptySlot(slot);
       }
     }
-  }
-
-  viewMeal(mealId) {
-    // This would open a recipe details modal
-    // For now, just log it
   }
 
   clearWeek() {
