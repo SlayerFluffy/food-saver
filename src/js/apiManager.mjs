@@ -1,5 +1,5 @@
 // API keys - Using environment variables 
-const spoonacularAPI = import.meta.env.VITE_SPOONACULAR_API_KEY;
+// const spoonacularAPI = import.meta.env.VITE_SPOONACULAR_API_KEY;
 
 // convert response from API to JSON
 async function convertToJson(res) {
@@ -14,7 +14,7 @@ async function convertToJson(res) {
 // API manager class - handles api calls
 export class APIManager {
     constructor() {
-        this.spoonacularAPIKey = spoonacularAPI;
+        this.spoonacularAPIKey = import.meta.env.VITE_SPOONACULAR_API_KEY;
         this.spoonacularBaseURL = 'https://api.spoonacular.com/recipes/';
     }
 
@@ -25,7 +25,7 @@ export class APIManager {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': spoonacularAPI,
+                'x-api-key': import.meta.env.VITE_SPOONACULAR_API_KEY,
             }
         };
         const ingredientList = listIngredients.join(',+');
@@ -55,7 +55,7 @@ export class APIManager {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': spoonacularAPI,
+                'x-api-key': import.meta.env.VITE_SPOONACULAR_API_KEY,
             }
         };
 
