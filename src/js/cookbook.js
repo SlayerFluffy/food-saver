@@ -1,7 +1,6 @@
 // Cookbook page functionality with authentication integration
 import { authManager, requireAuth } from './auth.mjs';
-import { qs, setClick } from './utils.mjs';
-import { APIManager } from './apiManager.mjs';
+import { qs } from './utils.mjs';
 import { showRecipeModal } from './recipe.js';
 
 class CookbookManager {
@@ -11,7 +10,6 @@ class CookbookManager {
             return;
         }
         
-        this.apiManager = new APIManager();
         this.init();
     }
 
@@ -235,16 +233,7 @@ class CookbookManager {
         // You can implement actual meal planner functionality here
     }
 
-    addIngredientsToShoppingList(recipe) {
-        if (!recipe.ingredients || recipe.ingredients.length === 0) {
-            this.showMessage('No ingredients found for this recipe', 'warning');
-            return;
-        }
 
-        // Implement shopping list integration
-        this.showMessage(`${recipe.ingredients.length} ingredients added to shopping list!`, 'success');
-        // You can implement actual shopping list functionality here
-    }
 
     filterCookbook(searchTerm) {
         const cards = document.querySelectorAll('.recipe-card');

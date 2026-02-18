@@ -1,6 +1,6 @@
 // Pantry page functionality with authentication integration
 import { authManager, requireAuth } from './auth.mjs';
-import { qs, setClick, getLocalStorage, setLocalStorage } from './utils.mjs';
+import { qs, setClick } from './utils.mjs';
 
 class PantryManager {
     constructor() {
@@ -15,7 +15,7 @@ class PantryManager {
 
     init() {
         this.loadUserPantry();
-        this.sortByName(); // Default sort by name
+        this.sortByName(); 
         this.updatePantryDisplay();
         this.setupEventListeners();
     }
@@ -140,7 +140,7 @@ class PantryManager {
             });
         });
 
-        // Edit item buttons (pencil icons)
+        // Edit item buttons 
         const editButtons = document.querySelectorAll('.edit-item');
         editButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -295,20 +295,20 @@ class PantryManager {
 
         // Prompt for new name
         const newName = prompt(`Edit name:`, item.name);
-        if (newName === null) return; // User cancelled
+        if (newName === null) return;
 
         // Prompt for new quantity
         const newQuantity = prompt(`Edit quantity for ${newName}:`, item.quantity);
-        if (newQuantity === null) return; // User cancelled
+        if (newQuantity === null) return; 
 
         // Prompt for new unit
         const newUnit = prompt(`Edit unit for ${newName}:`, item.unit);
-        if (newUnit === null) return; // User cancelled
+        if (newUnit === null) return; 
 
         // Prompt for new expiry date (format: YYYY-MM-DD)
         const currentExpiryDate = item.expiryDate ? item.expiryDate.split('T')[0] : '';
         const newExpiryDate = prompt(`Edit expiry date for ${newName}: (YYYY-MM-DD, leave blank for none)`, currentExpiryDate);
-        if (newExpiryDate === null) return; // User cancelled
+        if (newExpiryDate === null) return; 
         
         if (newName && newQuantity && newUnit) {
             try {
@@ -318,7 +318,7 @@ class PantryManager {
                 item.expiryDate = newExpiryDate ? newExpiryDate : null;
                 
                 authManager.updateUserData();
-                this.sortByName(); // Keep sorted by name
+                this.sortByName(); 
                 this.updatePantryDisplay();
                 this.showMessage('Item updated successfully', 'success');
             } catch (error) {

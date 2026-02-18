@@ -27,3 +27,5 @@ dist-ssr
 src/js/config.js
 
 food-saver.code-workspace
+# Local Netlify folder
+.netlify
