@@ -24,7 +24,7 @@ function createRecipeCard(recipe) {
 }
 
 // Display search results as recipe cards
-export function displayRecipe(recipes) {
+function displayRecipe(recipes) {
     const resultsContainer = qs('#recipeResults');
     if (!resultsContainer) return;
 
